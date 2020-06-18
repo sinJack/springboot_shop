@@ -1,0 +1,51 @@
+server:
+  port: 9090
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql:///shop
+    #使用druid的连接池
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      min-idle: 5
+      max-active: 100
+      max-wait: 60000
+      initial-size: 5
+      stat-view-servlet:
+        enabled: true   #开启监控中心
+        url-pattern: /druid/*
+        reset-enable: false
+        login-password: admin
+        login-username: admin
+        allow: 127.0.0.1   #白名单
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions:
+          - "*.js"
+          - "*.gif"
+          - "*.jpg"
+          - "*.png"
+          - "*.css"
+          - "*.ico"
+          - "/druid/*"
+      filter:
+        stat:
+          enabled: true     #是否开启sql监控功能
+          db-type: mysql
+          log-slow-sql: true
+          slow-sql-millis: 2000
+
+
+dubbo:
+  application:
+    name: shop_goods
+  registry:
+    address: zookeeper://192.168.65.128:2181
+  consumer:
+    check: false
+  protocol:
+    port: 20880
+

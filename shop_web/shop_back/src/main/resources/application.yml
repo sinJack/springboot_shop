@@ -1,0 +1,10 @@
+spring:
+  thymeleaf:
+    cache: false
+dubbo:
+  application:
+    name: shop_back
+  registry:
+    address: zookeeper://192.168.65.128:2181
+  protocol:
+    port: 20881
